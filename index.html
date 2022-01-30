@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<p>Blockchain</p>
+					<p>NFT</p>
+				</section>
+				<section>
+					<p>What are NFTs?</p>
+					<p>Are they just overpriced JPEGS?</p>
+					<p>Or are they a legitimate piece of digital property?</p>
+				</section>
+				<!-- Outline -->
+				<section>
+					<ul>
+						<li>vocabulary</li>
+						<li>history</li>
+						<li>how to mint an NFT</li>
+					</ul>
+				</section>
+				<!-- Vocabulary -->
+				<section>
+					<section>
+						<h2>Vocabulary</h2>
+					</section>
+					<section>
+						<p>NFT stands for <strong style="color: antiquewhite;">non-fungible token.</strong></p>
+						<p>Fungibility is essentially the ability to exchange an item for a similar item of the same value.</p>
+						<ul>
+							<li>BTC</li>
+							<li>ETH</li>
+						</ul>
+					</section>
+					<section><strong style="color: lightpink;">Minting</strong> is the process of creating something for the first time, or in our case, publishing a unique instance of our ERC721 token on the
+						blockchain. </section>
+					<section>
+						<p>ERC-721 token = NFT token</p>
+						<p>The ERC-721 is the most common NFT standard. If your Smart Contract implements certain standardized API methods, it can be called an ERC-721 Non-Fungible Token Contract.</p>
+						<p>PFP - profile picture</p>
+						<p>Rugged - to be scammed with an NFT project which takes all your money</p>
+						<p>OG (derived from 'Original Gangsta') - a person that was at the very beginning of a trend or chain of events</p>
+						<p>secondary - secondary market place (Magic Eden, Solana Art etc.)</p>
+					</section>
+				</section>
+				<!-- History -->
+				<section>
+					<section>
+						<h3>History of NFT</h3>
+					</section>
+					<section>
+						<p>In February 2021, Figma CEO Dylan Fields sold a piece of NFT art for $7.5 million. Similarly, Twitter co-founder Jack Dorsey sold his first tweet on Twitter as an NFT for $2,915,835.47.
+						</p>
+						<img src="./assets/jack-dorsey-nft.png" alt="" srcset="">
+					</section>
+					<section>
+						<img src="./assets/crypto-punks.png" alt="" srcset="">
+						<p>CryptoPunks was the project that started the 10k PFP trend and is currently available on Larva Labs with a floor price of over 65 ETH. </p>
+						<p>In June 23, 2017, Larva Labs created the uniquely generated 8-bit collectible characters that are known so well as the OG NFT project today.</p>
+						<p>The highest known sale of a CryptoPunk (4,200 ETH) currently belongs to CryptoPunk 3100 (Image source)</p>
+					</section>
+					<section>
+						<img src="./assets/crypto-kitties.png" alt="">
+						<p>Crypto Kitties</p>
+						<p>This NFT project was minted on November 23, 2017, and allowed you to collect and breed digital cats.</p>
+					</section>
+					<section>
+						<p>Dragon the CryptoKitty continues to be one of the most expensive NFTs in the space, valued at 600 ETH.</p>
+						<img src="./assets/dragon-kittie.png" alt="">
+					</section>
+					<section>
+						<p>EtherRocks</p>
+						<img src="./assets/ether-rocks.png" alt="" srcset="">
+						<p>EtherRocks were minted on December 26, 2017. Only 100 original rocks were ever created and made available.</p>
+						<p>Supply: 100. Floor: 400 ETH</p>
+					</section>
+				</section>
+				<!-- Steps to make an NFT -->
+				<section>
+					<section>
+						<p>How to Mint an NFT</p>
+						<img src="./assets/mint-nft.gif" alt="" srcset="">
+					</section>
+					<section>
+						<h3>STEP 1: CONNECT TO THE ETHEREUM NETWORK - ALCHEMY</h3>
+						<p>Connect to Ethereum network</p>
+						<p>Use a free account on https://www.alchemy.com/</p>
+					</section>
+					<section>
+						<h3>CREATE YOUR APP (AND API KEY)</h3>
+						<p>This will allow to make requests to the Ropsten test network. </p>
+						<img src="./assets/create-your-app-step-2.png" alt="" srcset="">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>STEP 3: CREATE AN ETHEREUM ACCOUNT (ADDRESS)</h3>
+						<p>MetaMask, a virtual wallet in the browser used to manage your Ethereum account address.</p>
+						<p>Also need to top it up from the Ropsten faucet</p>
+						<img src="./assets/metamask-ropsten-step-3.png" alt="" srcset="" height="50%">
+					</section>
+					<section>
+						<h3>STEP 4: INSTALL HARDHAT</h3>
+						<pre><code data-trim data-noescape>npm install --save-dev hardhat</code></pre>
+						<p>Hardhat is a development environment to compile, deploy, test, and debug your Ethereum software.</p>
+						<pre><code data-trim data-noescape>npx hardhat</code></pre>
+						<p>Create hardhat project</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3> STEP 5 - Write the contract code</h3>
+						<p>Smart contracts are written in a language called Solidity.</p>
+						<pre><code style="font-size: 10px">
+								//Contract based on [https://docs.openzeppelin.com/contracts/3.x/erc721](https://docs.openzeppelin.com/contracts/3.x/erc721)
+								// SPDX-License-Identifier: MIT
+								pragma solidity ^0.8.0;
+
+								import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+								import "@openzeppelin/contracts/utils/Counters.sol";
+								import "@openzeppelin/contracts/access/Ownable.sol";
+								import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
+								contract MyNFT is ERC721URIStorage, Ownable {
+										using Counters for Counters.Counter;
+										Counters.Counter private _tokenIds;
+
+										constructor() public ERC721("MyNFT", "NFT") {}
+
+										function mintNFT(address recipient, string memory tokenURI)
+												public onlyOwner
+												returns (uint256)
+										{
+												_tokenIds.increment();
+												uint256 newItemId = _tokenIds.current();
+												_mint(recipient, newItemId);
+												_setTokenURI(newItemId, tokenURI);
+												return newItemId;
+										}
+								}
+							</code></pre>
+					</section>
+					<section>
+						<p>At the top of our smart contract, we import three OpenZeppelin smart contract classes:</p>
+					</section>
+					<section></section>
+				</section>
+				<section>
+					<section>
+						<h3>STEP 6 - Connect Metamask & Alchemy to the project</h3>
+						<p>COnnect all three pieces we have:</p>
+						<p>Alchemy account, smart contract & Metamask</p>
+						<p>configure .env file</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>STEP 7 - Install Ethers.JS</h3>
+						<p>Ethers.js is a library that makes it easier to interact and make requests to Ethereum by wrapping standard JSON-RPC methods with more user friendly methods.</p>
+					</section>
+					<section>
+						<p>And also to deploy the contract by writing a deploy script:</p>
+						<pre><code style="font-size: 10px">
+									async function main() {
+										const MyNFT=await ethers.getContractFactory("MyNFT")
+
+										// Start deployment, returning a promise that resolves to a contract object
+										const myNFT=await MyNFT.deploy()
+										await myNFT.deployed()
+										console.log("Contract deployed to address:",myNFT.address)
+									}
+									main()
+										.then(() => process.exit(0))
+										.catch((error) => {
+											console.error(error)
+											process.exit(1)
+										})
+							</code></pre>
+					</section>
+					<section>
+						<p style="color: aquamarine;">const MyNFT = await ethers.getContractFactory("MyNFT");</p>
+						<p>A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts, so MyNFT here is a factory for instances of our NFT contract.</p>
+						<p style="color: aquamarine;">const myNFT = await MyNFT.deploy();</p>
+						<p>Calling deploy() on a ContractFactory will start the deployment, and return a Promise that resolves to a Contract. This is the object that has a method for each of our smart contract functions.</p>
+					</section>
+					<section>
+						<p>To deploy the contract:</p>
+						<pre><code>
+							npx hardhat --network ropsten run scripts/deploy.js
+						</code></pre>
+						<p>After that we should get a line: <small>Contract deployed to address: 0x81c587EB0fE773404c42c1d2666b5f557C470eED</small> </p>
+					</section>
+					<section>
+						<p>If we go to the Ropsten etherscan and search for our contract address we should able to see that it has been deployed successfully. </p>
+						<img src="./assets/etherscan-transaction.png" alt="">
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealMarkdown,RevealHighlight,RevealNotes]
+			});
+		</script>
+	</body>
+
+</html>
