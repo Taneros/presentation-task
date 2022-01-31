@@ -1,0 +1,29 @@
+.salmon {
+  color: lightsalmon;
+}
+
+.orange {
+  color: darkorange;
+}
+
+.pink {
+  color: lightpink;
+}
+
+p {
+  text-align: left;
+}
+
+.green {
+  color: lightgreen !important;
+}
+
+section > h4 {
+  text-transform: capitalize !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
